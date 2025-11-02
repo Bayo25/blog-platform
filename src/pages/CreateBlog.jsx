@@ -1,9 +1,8 @@
 import React, { useState } from "react"
-// import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 
 
-const CreateBlog =(props) => {
+const CreateBlog =() => {
   const [formData, SetFormData] = useState({
     title: "",
     body: "",
@@ -19,13 +18,17 @@ const CreateBlog =(props) => {
     e.preventDefault()
     // console.log(formData)
     const existingBlogData = JSON.parse(localStorage.getItem('formData')) || []
-    const updatedBlogData = [...existingBlogData, formData]
+    const newId = `post-${formData.id}-${Date.now()}`
+    console.log('created blog id: ',newId)
+    const newBlog = { ...formData, id: newId }
+    const updatedBlogData = [...existingBlogData, newBlog]
     localStorage.setItem('formData', JSON.stringify(updatedBlogData))
     alert("Blog posted successfully")
-    console.log('formData', formData)
-    console.log('API Data', existingBlogData)
+    // console.log('formData', formData)
+    // console.log('API Data', existingBlogData)
+    console.log(updatedBlogData)
   }
- 
+
   return (
     <>
       <section className="flex items-center justify-center min-h-screen">
