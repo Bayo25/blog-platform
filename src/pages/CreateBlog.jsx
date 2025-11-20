@@ -1,5 +1,7 @@
 import React, { useState } from "react"
 import Footer from "../components/Footer";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 const CreateBlog =() => {
@@ -14,16 +16,21 @@ const CreateBlog =() => {
     SetFormData(prev => ({ ...prev, [name]: value }));
   };
 
+  const notify = () => {
+    toast("Blog posted successfully")
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault()
     // console.log(formData)
     const existingBlogData = JSON.parse(localStorage.getItem('formData')) || []
-    const newId = `post-${formData.id}-${Date.now()}`
-    console.log('created blog id: ',newId)
+    const newId = `post-${Date.now()}`
+    console.log('created blog id: ', newId)
     const newBlog = { ...formData, id: newId }
     const updatedBlogData = [...existingBlogData, newBlog]
     localStorage.setItem('formData', JSON.stringify(updatedBlogData))
-    alert("Blog posted successfully")
+    notify()
+    // alert("Blog posted successfully")
     // console.log('formData', formData)
     // console.log('API Data', existingBlogData)
     console.log(updatedBlogData)

@@ -16,7 +16,7 @@ const Home = () => {
         const BlogResponse = await axios.get('https://jsonplaceholder.typicode.com/posts') 
         const postsWithUniqueKey = BlogResponse.data.map(post => ({
         ...post,
-        uniqueKey: `post-${post.id}-${Date.now()}`
+        uniqueKey: `post-${Date.now()}`
       }))
         setPost(postsWithUniqueKey)
         localStorage.setItem('formData', JSON.stringify(postsWithUniqueKey))
@@ -39,29 +39,6 @@ const Home = () => {
     }
   }, [])
 
-  const handleDeletePost = (data) => {
-    console.log('Delete button clicked for post:', data)
-    
-    const confirmDelete = window.confirm("Are you sure you want to delete this post?")
-    console.log('User confirmed delete:', confirmDelete)
-    
-    if (confirmDelete) {
-      const blogPostData = JSON.parse(localStorage.getItem('formData') || '[]')
-      console.log('All posts before deletion:', blogPostData)
-      console.log('Post to delete - uniqueKey:', data.uniqueKey)
-      
-      const updatedPosts = blogPostData.filter((post) => post.uniqueKey !== data.uniqueKey)
-      console.log('Posts after deletion:', updatedPosts)
-      console.log('Number of posts removed:', blogPostData.length - updatedPosts.length)
-      
-      localStorage.setItem('formData', JSON.stringify(updatedPosts))
-      setPost(updatedPosts)
-      
-      alert('Post deleted successfully!')
-    } else {
-      console.log('Delete cancelled by user')
-    }
-  }
 
   return ( 
     <main>
@@ -83,12 +60,8 @@ const Home = () => {
                       to={'/edit-blog'}
                       state={{title:data.title, body: data.body, id: data.id, uniqueKey: data.uniqueKey}}
                     >
-                      <Button label="Edit Blog" variant="success"/>
+                      <Button label="Edit" variant="success"/>
                     </Link>
-
-                    {/* <Link to={'/delete-blog/:id'}> */}
-                      <Button label="Delete Post" variant="danger" onClick={() => handleDeletePost(data) }/>
-                    {/* </Link> */}
                   </div>
                 </div> 
             ))

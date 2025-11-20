@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import Footer from "../components/Footer";
 import { useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 
 const EditBlog =() => {
@@ -21,6 +22,10 @@ const EditBlog =() => {
     SetFormData(prev => ({ ...prev, [name]: value }));
   };
 
+  const editNofitication = () => {
+    toast("Blog post updated successfully!")
+  }
+
 
   const handlePostUpdate = (e) => {
     e.preventDefault()
@@ -37,8 +42,9 @@ const EditBlog =() => {
       }
       
       localStorage.setItem('formData', JSON.stringify(postData))
+      editNofitication()
       
-      alert('Blog post updated successfully!')
+      // alert('Blog post updated successfully!')
       navigate('/home')
     } else {
       alert('Post not found!')
@@ -49,7 +55,7 @@ const EditBlog =() => {
   }
 
   useEffect(() => {
-    if (title && body && id) {
+    if (title && body && id && uniqueKey) {
       SetFormData({ title, body, id, uniqueKey })
     console.log('Unique key from use effect:', uniqueKey)
 
@@ -59,8 +65,8 @@ const EditBlog =() => {
 
   return (
     <>
-      <h1>{title}</h1>
-      <p>{body}</p>
+      {/* <h1>{title}</h1>
+      <p>{body}</p> */}
       <section className="flex items-center justify-center min-h-screen">
         <form
           onSubmit={handlePostUpdate}

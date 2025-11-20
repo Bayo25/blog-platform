@@ -5,9 +5,6 @@ import Button from "../components/Button"
 
 
 const NavBar = () => {
-  const handleCreateBlog = () => {
-
-  }
 
 
   return (
@@ -23,8 +20,7 @@ const NavBar = () => {
         </ul>
 
         <Link to="/create-blog">
-          <Button label="Create Blog" variant="primary" 
-          onClick={handleCreateBlog}/>
+          <Button label="Create Blog" variant="primary"/>
         </Link>
       </nav>
     </main>
