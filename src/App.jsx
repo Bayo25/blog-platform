@@ -8,7 +8,7 @@ import PostDetails from './pages/PostDetails'
 import EditBlog from './pages/EditBlog'
 import { ToastContainer } from 'react-toastify'
 import "react-toastify/dist/ReactToastify.css"; 
-import Admin from './pages/Admin'
+import Admin from './pages/Admin2'
 
 
 function App() {
